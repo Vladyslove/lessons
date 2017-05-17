@@ -8,6 +8,9 @@ public class JelementaryGroup {
 
   void add (Student student) {
     students [size++] = student;
+
+    // CannotBeImported c; // Cannot be imported, Ask himself why? (troll)
+
   }
 }
 
