@@ -1,4 +1,4 @@
-public class Bag <Item> {
+public class Bag<Item>  {
   private Node firstNode;
   private int size = 0;
 
@@ -19,7 +19,7 @@ public class Bag <Item> {
   // для лучшего понимание варианта с обратным порядком наполнения Bag
 
   // 10-1 ОБРАТНЫЙ ПОРЯДОК НАПОЛНЕНИЯ
-  // public void add(int item) {
+  // public void add(Item item) {
   //   if (firstNode == null) {
   //     firstNode = new Node(item);
   //   } else {
@@ -29,6 +29,12 @@ public class Bag <Item> {
   //     firstNode = node;
   //     node.next = temp;
 
+      //SWAP method
+      // private static void nodeSwap (Node a, Node b) {
+      //   int c = a. value/next;
+      //   a.value/next = b.value/next;
+      //   b.value/next = c;
+      // }
       // int a = 1; firstNode
       // int b = 2; newNode
       // int c = a; // c == 1 temp = firstNode
@@ -56,32 +62,38 @@ public class Bag <Item> {
     return size() == 0;
   }
 
-private Node currentElement = firstNode;
-private boolean finished = false;
-
-public Item next() {
-
-  Item value = currentElement.value;
-  currentElement = currentElement.next;
-
-  if (currentElement == null) {
-    finished = true;
-  }
-  return value;
-}
-
-public boolean hasNext() {
-  if (currentElement == null && finished == false) {
-      currentElement = firstNode;
-  }
-  return currentElement != null;
-}
-
   private class Node {
     Node(Item value) {
       this.value = value;
     }
+
     Item value;
     Node next;
   }
+
+  public Iterator<Item> iterator() {
+    return new Iterator<Item>()
+                            { // ANONIM CLASS
+      private Node current = firstNode;
+
+      public boolean hasNext() {
+        return current != null;
+      }
+
+      public Item next() {
+        Item value = current.value;
+        current = current.next;
+
+        return value;
+
+      }
+
+      };
+  }
 }
+
+
+  interface Iterator <Item> {
+    boolean hasNext();
+    Item next();
+  }
