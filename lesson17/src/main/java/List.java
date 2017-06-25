@@ -11,5 +11,11 @@ public interface List<T> {
 
   int size();
 
+  void remove(int index);
+
   Iterator<T> iterator();
+
+  ReverseIterator<T> reverseIterator();
+
+  // RandomlyIterable<T> randomlyIterable();
 }
