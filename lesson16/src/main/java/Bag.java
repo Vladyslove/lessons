@@ -81,8 +81,9 @@ public class Bag<Item>  {
       }
 
       public Item next() {
-        Item value = current.value;
-        current = current.next;
+        // Item value = current.value;
+        // current = current.next;
+        Item value = current.value.next;
 
         return value;
 
