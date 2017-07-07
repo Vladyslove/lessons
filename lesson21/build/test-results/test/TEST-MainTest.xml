@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-07-07T15:50:34" hostname="vladyslav-VirtualBox" time="0.013">
+  <properties/>
+  <testcase name="testNothing2" classname="MainTest" time="0.007"/>
+  <testcase name="test_withComparator" classname="MainTest" time="0.001"/>
+  <testcase name="test_withString" classname="MainTest" time="0.001"/>
+  <testcase name="testNothing" classname="MainTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
