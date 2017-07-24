@@ -11,34 +11,29 @@ import static org.junit.Assert.assertThat;
 public class StreamTest {
   private  String text = "ololo ya voditel nlo"+
           "ololo ya voditel nlo"+"ololo ya voditel nlo НЛО";
-  
+
   @Test
+//  @Test (expected = )
+//  @Test (timeout = )
 
   public void test_arrayInputStream() throws Exception {
 
 
     InputStream inputStream = new ByteArrayInputStream (text.getBytes ());
-    int data1 = inputStream.read ();
-    int data2 = inputStream.read ();
-    int data3 = inputStream.read ();
-    int data4 = inputStream.read ();
-
-    System.out.println (Character.getName (data1));
-    System.out.println (Character.getName (data2));
-    System.out.println (Character.getName (data3));
-    System.out.println (Character.getName (data4));
+    //int data1 = inputStream.read (); // is read 1 byte
+    //System.out.println (Character.getName (data1)); // and print
 
     int data;
-    int charsCount = 4 - 1; // because we called read four times already
+    int charsCount = - 1; // because loop do-while will be executed 1 more time bigger
     do {
       data = inputStream.read ();
-      System.out.print((char)data);
+      System.out.print ((char) data);
       charsCount++;
     } while (data != -1);
 
     inputStream.close ();
 
-    assertThat(charsCount, is(text.length () + "НЛО".length ()));
+    assertThat (charsCount, is (text.length () + "НЛО".length ()));
   }
 
   @Test
