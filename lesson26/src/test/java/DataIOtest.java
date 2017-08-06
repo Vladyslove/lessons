@@ -27,6 +27,7 @@ public class DataIOtest {
     item2.name = input.readUTF ();
 
     System.out.println (item2);
+
   }
 
   @Test
