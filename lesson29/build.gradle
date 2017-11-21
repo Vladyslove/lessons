@@ -8,6 +8,8 @@ repositories {
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile 'org.hamcrest:hamcrest-all:1.3'
+    compileOnly "org.projectlombok:lombok:1.16.16"
+
 }
 
 task execute(type:JavaExec) {

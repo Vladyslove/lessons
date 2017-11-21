@@ -1,38 +1,28 @@
-/**
- * Created by User on 07.08.2017.
- */
-
-import jdk.nashorn.internal.objects.annotations.Where;
 import org.junit.Test;
-import sun.util.calendar.BaseCalendar;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.*;
 public class SocketTest {
-    @Test(timeout = 50_000)
+
+    @Test(timeout = 30_000)
     public void testSimpleService() throws Exception {
         try (ServerSocket serverSocket = new ServerSocket(1313)) { // serverSocket is created.
             while (true) {
                 try (Socket connection = serverSocket.accept()) { // We launch sever to wait
-//                    System.out.println(connection.getInetAddress());
-//                    System.out.println(connection.getPort());
+                    System.out.println(connection.getInetAddress());
+                    System.out.println(connection.getPort());
+
                     OutputStream out = connection.getOutputStream();
                     Writer writer = new OutputStreamWriter(out);
 
                     writer.write("Hello-" + new Random().nextInt() + "\n");
                     writer.flush();
 
-                    /*Thread.sleep(5 * 1000);*/
                     TimeUnit.SECONDS.sleep(5);
+                    /*Thread.sleep(5 * 1000);*/
 
                     writer.write(" enough ... ");
                     writer.flush();
@@ -41,9 +31,55 @@ public class SocketTest {
         }
     }
 
-    @Test(timeout = 50_000)
+/*    @Test(timeout = 50_000)
+    public void testAdvancedService0() throws Exception {
+        class Worker extends Thread {
+
+            private Socket connection;
+
+            public Worker(Socket connection) {
+                this.connection = connection;
+                System.out.println(connection.isClosed()); // false
+            }
+            @Override
+            public void run() {
+                System.out.println(connection.isClosed()); // was true, when in line 77 in loop while
+                //  try was with resources //try (Socket connection = serverSocket.accept())
+                try (
+                        OutputStream out = connection.getOutputStream();
+                        Writer writer = new OutputStreamWriter(out)) {
+
+//                    System.out.println(connection);
+                    writer.write("Hello-" + new Random().nextInt() + "\n");
+                    writer.flush();
+
+                    *//*Thread.sleep(5 * 1000);*//*
+                    TimeUnit.SECONDS.sleep(10);
+
+                    writer.write(" enough ...\n");
+                    writer.flush();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+//        new Worker().start(); // we launch Thread
+        try (ServerSocket serverSocket = new ServerSocket(1313)) { // serverSocket is created.
+            while(true) {
+                try { // We launch sever to wait
+                    Socket connection = serverSocket.accept();
+                    new Worker(connection).start();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }*/
+
+    @Test(timeout = 40_000)
     public void testAdvancedService() throws Exception {
         class Worker extends Thread {
+
             private Socket connection;
 
             public Worker(Socket connection) {
@@ -63,7 +99,7 @@ public class SocketTest {
                     writer.write("Hello-" + new Random().nextInt() + "\n");
                     writer.flush();
 
-                    /*Thread.sleep(5 * 1000);*/
+//                    Thread.sleep(5 * 1000);
                     TimeUnit.SECONDS.sleep(10);
 
                     writer.write(" enough ...\n");
